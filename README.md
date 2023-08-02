@@ -61,7 +61,7 @@ cl_int clGetPlatformInfo(cl_platform_id   platform,
 |param_value|void*|保存平台属性信息的缓冲区|
 |param_value_size_ret|size_t*|返回属性信息的实际长度|
 
-FULL_PROFILE 和 EMBEDDED_PROFILE 的区别：
+**FULL_PROFILE** 和 **EMBEDDED_PROFILE** 的区别：
 - FULL_PROFILE：OpenCL实现支持OpenCL规范的所有功能。
 - EMBEDDED_PROFILE：OpenCL实现支持OpenCL嵌入式简档，是OpenCL规范的一个子集。
 
@@ -112,4 +112,39 @@ CL_PLATFORM_VENDOR: QUALCOMM
 CL_PLATFORM_VERSION: OpenCL 3.0 QUALCOMM build: commit #5e81ec0141 changeid #Icc5bd9b9d5 Date: 11/07/22 Mon Local Branch:  Remote Branch: 
 CL_PLATFORM_PROFILE: FULL_PROFILE
 CL_PLATFORM_EXTENSIONS: 
+```
+
+<br>
+
+### 3. clGetDeviceIDs
+
+**描述：** 获取指定OpenCL平台支持的OpenCL设备列表（一个平台可能关联不同的设备）。
+
+**函数原型：**
+
+```cpp
+cl_int clGetDeviceIDs(cl_platform_id  platform,
+                      cl_device_type  device_type,
+                      cl_uint         num_entries,
+                      cl_device_id    *devices,
+                      cl_uint         *num_devices);
+```
+
+|参数名|参数类型|说明|
+|:--|:--|:--|
+|platform|cl_platform_id|指定的OpenCL平台|
+|device_type|cl_device_type|OpenCL设备类型，支持以下几种：<li>CL_DEVICE_TYPE_CPU：CPU作为OpenCL设备</li><li>CL_DEVICE_TYPE_GPU：GPU作为OpenCL设备</li><li>CL_DEVICE_TYPE_ACCELERATOR：计算加速器作为OpenCL设备，设备通过PCIe与主机通信</li><li>CL_DEVICE_TYPE_CUSTOM：不支持OpenCL C编程的计算设备</li> <li>CL_DEVICE_TYPE_DEFAULT：系统默认OpenCL设备，不能是CL_DEVICE_TYPE_CUSTOM</li><li>CL_DEVICE_TYPE_ALL：除了CL_DEVICE_TYPE_CUSTOM之外的所有OpenCL设备</li>|
+|num_entries|cl_uint|指定devices指向的设备列表中最多可以存储的设备对象|
+|devices|cl_device_id*|设备列表|
+|num_devices|cl_uint*|输出实际给出的设备对象个数|
+
+**调用示例：**
+
+```cpp
+cl_device_id *devices = NULL;
+cl_uint num_device = 0;
+
+err = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_GPU, 0, NULL, &num_device);
+devices = (cl_device_id*)malloc(sizeof(cl_device_id) * num_device);
+err = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_GPU, num_device, devices, NULL);
 ```
