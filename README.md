@@ -56,12 +56,12 @@ cl_int clGetPlatformInfo(cl_platform_id   platform,
 |参数名|参数类型|说明|
 |:--|:--|:--|
 |platform|cl_platform_id|指定查询的OpenCL平台|
-|param_name|cl_platform_info|执行需要查询的OpenCL平台属性信息，取值范围参考下文说明|
+|param_name|cl_platform_info|执行需要查询的OpenCL平台属性信息，取值范围详见下文|
 |param_value_size|size_t|指定查询结果的缓冲区字节大小|
 |param_value|void*|保存平台属性信息的缓冲区|
 |param_value_size_ret|size_t*|返回属性信息的实际长度|
 
-cl_platform_info取值：
+cl_platform_info取值范围：
 
 - CL_PLATFORM_PROFILE：识别平台是支持FULL_PROFILE还是EMBEDDED_PROFILE
 - CL_PLATFORM_VERSION：返回支持的最大OpenCL版本
@@ -142,10 +142,19 @@ cl_int clGetDeviceIDs(cl_platform_id  platform,
 |参数名|参数类型|说明|
 |:--|:--|:--|
 |platform|cl_platform_id|指定的OpenCL平台|
-|device_type|cl_device_type|OpenCL设备类型，支持以下几种：<li>CL_DEVICE_TYPE_CPU：CPU作为OpenCL设备</li><li>CL_DEVICE_TYPE_GPU：GPU作为OpenCL设备</li><li>CL_DEVICE_TYPE_ACCELERATOR：计算加速器作为OpenCL设备，设备通过PCIe与主机通信</li><li>CL_DEVICE_TYPE_CUSTOM：不支持OpenCL C编程的计算设备</li> <li>CL_DEVICE_TYPE_DEFAULT：系统默认OpenCL设备，不能是CL_DEVICE_TYPE_CUSTOM</li><li>CL_DEVICE_TYPE_ALL：除了CL_DEVICE_TYPE_CUSTOM之外的所有OpenCL设备</li>|
+|device_type|cl_device_type|OpenCL设备类型，支持类型详见下文|
 |num_entries|cl_uint|指定devices指向的设备列表中最多可以存储的设备对象|
 |devices|cl_device_id*|设备列表|
 |num_devices|cl_uint*|输出实际给出的设备对象个数|
+
+cl_device_type 取值范围：
+
+- CL_DEVICE_TYPE_CPU：CPU作为OpenCL设备
+- CL_DEVICE_TYPE_GPU：GPU作为OpenCL设备
+- CL_DEVICE_TYPE_ACCELERATOR：计算加速器作为OpenCL设备，设备通过PCIe与主机通信
+- CL_DEVICE_TYPE_CUSTOM：不支持OpenCL C编程的计算设备
+- CL_DEVICE_TYPE_DEFAULT：系统默认OpenCL设备，不能是CL_DEVICE_TYPE_CUSTOM
+- CL_DEVICE_TYPE_ALL：除了CL_DEVICE_TYPE_CUSTOM之外的所有OpenCL设备
 
 **调用示例：**
 
