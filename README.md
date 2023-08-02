@@ -56,12 +56,8 @@ cl_int clGetPlatformInfo(cl_platform_id   platform,
 |参数名|参数类型|说明|
 |:--|:--|:--|
 |platform|cl_platform_id|指定查询的OpenCL平台|
-|param_name|cl_platform_info|执行需要查询的OpenCL平台属性信息，取值如下：
-- CL_PLATFORM_PROFILE：识别平台是支持FULL_PROFILE还是EMBEDDED_PROFILE
-- CL_PLATFORM_VERSION：返回支持的最大OpenCL版本
-- CL_PLATFORM_NAME：返回OpenCL平台的名称
-- CL_PLATFORM_VENDOR：返回OpenCL平台开发商的名称
-- CL_PLATFORM_EXTENSIONS：返回OpenCL平台支持的扩展名列表|
+|param_name|cl_platform_info|执行需要查询的OpenCL平台属性信息，取值如下：\
+<li>CL_PLATFORM_PROFILE：识别平台是支持FULL_PROFILE还是EMBEDDED_PROFILE</li><li>CL_PLATFORM_VERSION：返回支持的最大OpenCL版本</li><li>CL_PLATFORM_NAME：返回OpenCL平台的名称</li><li>CL_PLATFORM_VENDOR：返回OpenCL平台开发商的名称</li><li>CL_PLATFORM_EXTENSIONS：返回OpenCL平台支持的扩展名列表</li>|
 |param_value_size|size_t|指定查询结果的缓冲区字节大小|
 |param_value|void*|保存平台属性信息的缓冲区|
 |param_value_size_ret|size_t*|返回属性信息的实际长度|
