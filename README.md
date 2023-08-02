@@ -56,12 +56,21 @@ cl_int clGetPlatformInfo(cl_platform_id   platform,
 |参数名|参数类型|说明|
 |:--|:--|:--|
 |platform|cl_platform_id|指定查询的OpenCL平台|
-|param_name|cl_platform_info|执行需要查询的OpenCL平台属性信息，取值如下：<li>CL_PLATFORM_PROFILE：识别平台是支持FULL_PROFILE还是EMBEDDED_PROFILE</li><li>CL_PLATFORM_VERSION：返回支持的最大OpenCL版本</li><li>CL_PLATFORM_NAME：返回OpenCL平台的名称</li><li>CL_PLATFORM_VENDOR：返回OpenCL平台开发商的名称</li><li>CL_PLATFORM_EXTENSIONS：返回OpenCL平台支持的扩展名列表</li>|
+|param_name|cl_platform_info|执行需要查询的OpenCL平台属性信息，取值范围参考下文说明|
 |param_value_size|size_t|指定查询结果的缓冲区字节大小|
 |param_value|void*|保存平台属性信息的缓冲区|
 |param_value_size_ret|size_t*|返回属性信息的实际长度|
 
+cl_platform_info取值：
+
+- CL_PLATFORM_PROFILE：识别平台是支持FULL_PROFILE还是EMBEDDED_PROFILE
+- CL_PLATFORM_VERSION：返回支持的最大OpenCL版本
+- CL_PLATFORM_NAME：返回OpenCL平台的名称
+- CL_PLATFORM_VENDOR：返回OpenCL平台开发商的名称
+- CL_PLATFORM_EXTENSIONS：返回OpenCL平台支持的扩展名列表
+
 **FULL_PROFILE** 和 **EMBEDDED_PROFILE** 的区别：
+
 - FULL_PROFILE：OpenCL实现支持OpenCL规范的所有功能。
 - EMBEDDED_PROFILE：OpenCL实现支持OpenCL嵌入式简档，是OpenCL规范的一个子集。
 
@@ -144,7 +153,12 @@ cl_int clGetDeviceIDs(cl_platform_id  platform,
 cl_device_id *devices = NULL;
 cl_uint num_device = 0;
 
+// 获取指定平台连接的OpenCL设备数量
 err = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_GPU, 0, NULL, &num_device);
+
+// 获取指定平台连接的OpenCL设备列表
 devices = (cl_device_id*)malloc(sizeof(cl_device_id) * num_device);
 err = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_GPU, num_device, devices, NULL);
 ```
+
+<br>
